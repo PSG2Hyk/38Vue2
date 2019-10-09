@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue2.6.10.js"></script>
+</head>
+<body>
+<div id="demo">
+    <my-button></my-button>
+</div>
+<script>
+    Vue.component('my-button',{
+        template:`<div>
+                        <button @click="click1">+</button>
+                        <input v-focus type="text" v-html="msg" v-model="count">
+                        <button @click="click2">-</button>
+                  </div>`,
+        data() {
+            return{
+                count:1,
+            }
+        },
+        methods:{
+            click1(){
+                this.count++;
+            },
+            click2(){
+                if (this.count>1){
+                    this.count--;
+                } else (
+                    alert('不能小于一')
+                )
+            }
+        },
+        computed:{
+            msg(){
+                var reg = new RegExp(/^[1-9]\d*$/);
+                if (!reg.test(this.count)){
+                    alert('输入数据不合法');
+                    focus();
+                    this.count=1;
+                }
+                else if(this.count<0){
+                    alert('输入数据不合法');
+                    focus();
+                    this.count=1;
+                }
+            }
+        }
+
+    }),
+    new Vue({
+        el:"#demo"
+    })
+</script>
+</body>
+</html>

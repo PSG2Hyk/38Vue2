@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue2.6.10.js"></script>
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        .active {
+            background-color:lightsteelblue;
+            font-weight: bold;
+            color: blue;
+        }
+        #demo {
+            width: 800px;
+            height: 400px;
+            background-color: #fff;
+            border: rebeccapurple 2px solid;
+        }
+        .menuList {
+            width: 800px;
+            height: 60px;
+        }
+         ul {
+            width: 100%;
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            color: #717181;
+            font-size: 16px;
+            line-height: 60px;
+        }
+        ul li {
+            flex: 1;
+            text-align: center;
+        }
+        .tab{
+            width: 700px;
+            padding: 40px 20px;
+            color:#717181;
+            font-size: 14px;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div id="demo">
+    <div class="menuList">
+        <ul>
+            <li v-for="(item,index) in list" :key="item.id" :class="{active:num==index}" @click="getNum(index)">
+                {{item}}
+            </li>
+        </ul>
+    </div>
+    <div class="tab">
+        <div v-for='(itemCon,index) in tabContents' v-show="index == num" v-html="itemCon" >
+        </div>
+    </div>
+</div>
+<script>
+    var demo = new Vue({
+        el: "#demo",
+        data(){
+            return{
+                num: 0,
+                list: ["商城A", "商店B", "商店C","商店D"],
+                tabContents: [
+                    "<ul><li>时令生鲜</li><li>休闲零食</li><li>营养保健</li><li>粮油调味</li></ul>",
+                    "这是选项2的内容",
+                    "这是选项3的内容",
+                    "这是选项4的内容",],
+                myclass:'blue'
+            }
+        },
+        methods: {
+            getNum(index) {
+                this.num = index;
+            }
+        }
+    })
+</script>
+
+</body>
+</html>
